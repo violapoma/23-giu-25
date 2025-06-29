@@ -13,65 +13,6 @@ const productsRow = document.querySelector('#productsRow');
     "price": 
   } 
 */
-const productsArray = [
-  {
-    "name": "Tab P12",
-    "description": "RAM 8GB, Memory: 256GB, Display 12.7inch, pen included",
-    "brand": "Lenovo",
-    "imageUrl": "https://m.media-amazon.com/images/I/511ShM48COL._AC_SX679_.jpg",
-    "price": 379
-  },
-  {
-    "name": "Happy Seedlings",
-    "description": "Cute lego botanicals",
-    "brand": "LEGO",
-    "imageUrl": "https://m.media-amazon.com/images/I/81JGnQochGL._AC_SX679_.jpg",
-    "price": 16
-  },
-  {
-    "name": "MacBook Pro M1",
-    "description": "Chip M1, display 13inch, 512SSD",
-    "brand": "Apple",
-    "imageUrl": "https://m.media-amazon.com/images/I/31I2mbeJ0FL._AC_SX679_.jpg",
-    "price": 942
-  },
-  {
-    "name": "Nothing Phone 2a",
-    "description": "12+256GB - Smartphone with Nothing OS 2.5 - Milk White",
-    "brand": "Nothing",
-    "imageUrl": "https://m.media-amazon.com/images/I/519KVc-h8xL._AC_SX679_.jpg",
-    "price": 274
-  },
-  {
-    "name": "Redmi Buds 6 Lite",
-    "description": "Bluetooth In-Ear Headphones, Noise Cancellation, Dual Microphone, High Audio Quality, USB-C Charging Case, 38h Battery Life",
-    "brand": "Xiaomi",
-    "imageUrl": "https://m.media-amazon.com/images/I/61pzQJFZBAL._AC_SX679_.jpg",
-    "price": 19
-  }
-]
-/* NON SI SVUOTA, questa non serve, ma la tengo da parte */
-// async function postProducts() {
-//   try {
-//     const richieste = productsArray.map(async post => 
-//       await fetch(myURL, {
-//         method:'POST',
-//         headers: {
-//           'Authorization': myToken,
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(post)
-//       })
-//      .then(data => data.json())
-//   );
-//   console.log('richieste:', richieste); //promise
-//     const prodotti = await Promise.all(richieste);
-//     console.log('prodotti:', prodotti); //undefined
-//   } catch(error) {
-//     console.log(error);
-//   }
-// }
-// postProducts();
 
 getProducts();
 
@@ -100,7 +41,7 @@ function createProductCard(prod){
   // console.log('[createProductCard] STARTING');
 
   const col = document.createElement('div');
-  col.className = 'col-3 g-3';
+  col.className = 'col-sm-12 col-md-6 col-lg-3 g-3';
 
   const card = document.createElement('div');
   card.className = 'card h-100 justify-content-between p-2'; 
@@ -159,12 +100,4 @@ function fillPage(products) {
   console.log('[fillPage] DONE');
 }
 
-/** da mettere nella POST
-"name": "",
-"description": "",
-"brand": "",
-"imageUrl": "",
-"price":
-*/
-// tutte le post qui sotto
 
