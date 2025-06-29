@@ -1,0 +1,39 @@
+h1{
+  color: var(--priamry-text-color);
+}
+
+.card img{
+  object-fit: contain;
+}
+
+.cardBodyStyle{
+  background-color: var(--card-background-color);
+  color: var(--priamry-text-color);
+  border-radius: 10px;
+}
+
+.card-body a{
+  padding-right: 1em;
+  text-decoration: none;
+  font-size: 1.5em;
+  color: var(--secondary-text-color);
+  text-align: right;
+  display: block; /*perché altrimenti transform non funziona*/
+  transition: transform 0.2s linear;
+}
+
+.card-body a:hover{
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+
+.ellipsis {
+  white-space: nowrap;         
+  overflow: hidden;            
+  text-overflow: ellipsis;     
+  width: 90%;                
+}
+.imgPreview {
+  max-height: 300px;
+  object-fit: contain;
+}

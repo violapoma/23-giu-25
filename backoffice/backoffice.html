@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backoffice</title>
+
+  <!--google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Agdasima&family=Bungee+Outline&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Passion+One:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <!-- bs -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+    crossorigin="anonymous"></script>
+  <!-- bs icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/shared/struttura.css">
+  <link rel="stylesheet" href="/backoffice/backoffice.css">
+
+  <script src="/shared/struttura.js" defer></script>
+  <script src="/backoffice/backoffice.js" defer></script>
+</head>
+
+<body class="min-vh-100 d-flex flex-column">
+  <div id="header" class="px-5 d-flex justify-content-between align-items-center">
+    <!-- logo -->
+      <a href="index.html"><img src="/assets/logo2.png" alt="logo" class="logoImg"></a>
+      <p class="text-center mb-0" onclick="backHome()">the shop</p>
+      <div>
+        <button id="logInBtn" class="btn" data-bs-toggle="modal" data-bs-target="#adminLogIn"><i class="bi bi-person-badge"></i></button>
+        <a href="/backoffice/backoffice.html" id="goToBackoffice" class="btn" title="backoffice"><i class="bi bi-hdd"></i></a>
+      </div>
+  </div> <!-- fine header -->
+
+  <div id="spinnerOverlay">
+    <div class="spinner-border text-center spinnerStyle" role="status">
+    </div>
+  </div>
+
+  <!-- modale per login admin -->
+  <div class="modal fade" id="adminLogIn" tabindex="-1" aria-labelledby="adminLogInLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="adminLogInLabel">Log in as ADMIN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm" class="row g-3 justify-content-center needs-validation" novalidate>
+            <div class="col-12">
+              <label for="username" class="form-label fw-bold">USERNAME</label>
+              <input type="text" class="form-control has-validation" id="username" name="username" value="admin" required>
+            </div>
+            <div class="invalid-feedback">
+              Please enter the username
+            </div>
+            <div class="col-12 position-relative">
+              <label for="pwField" class="form-label fw-bold">PASSWORD</label>
+              <input type="password" class="form-control has-validation" id="pwField" name="pwField" value="admin" required>
+              <button type="button" class="btn position-absolute translate-middle-y" id="togglePassword">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">
+              Please enter the password
+            </div>
+            <div class="row mt-2 align-items-center">
+              <div id="alertLogIn" class="col-9 alert text-center fade" role="alert">
+              </div>
+              <div class="col-3">
+                <button class="btn w-100" type="submit">Log In</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center fs-2">
+          Are you sure you want to delete this item?
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button id="deleteModalBtn" type="button" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- contenuto pagina -->
+  <div id="mainContent" class="w-75 m-auto my-5">
+    <button id="addProduct" class="btn dropdown-toggle dropdownBtn mb-2" type="button" data-bs-toggle="dropdown"
+      data-bs-auto-close="outside">Add Product</button>
+
+    <div id="formDiv" class="dropdown-menu p-4 mb-3">
+      <form id="addProductForm" class="row g-3 needs-validation" novalidate>
+        <div class="col-sm-12 col-md-4">
+          <label for="pName" class="form-label">NAME *</label>
+          <input type="text" class="form-control product-field" id="pName" name="pName" required>
+          <div class="invalid-feedback">
+            Please enter the product name
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <label for="brandName" class="form-label">BRAND NAME *</label>
+          <input type="text" class="form-control product-field" id="brandName" name="brandName" required>
+          <div class="invalid-feedback">
+            Please enter the brand name
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <label for="price" class="form-label">PRICE *</label>
+          <input type="number" class="form-control product-field" id="price" name="price" required>
+          <div class="invalid-feedback">
+            Please enter the price
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <label for="description" class="form-label">DESCRIPTION *</label>
+          <input type="text" class="form-control product-field" id="description" name="description" required>
+          <div class="invalid-feedback">
+            Please enter the product description
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <label for="imgURL" class="form-label">IMAGE URL *</label>
+          <input type="text" class="form-control has-validation product-field" id="imgURL" name="imgURL" required>
+          <div class="invalid-feedback">
+            Please enter the image URL
+          </div>
+        </div>
+        <div class="col-12 row align-items-center py-3 pe-0">
+          <div class="col-2">
+            <button class="btn" type="submit" id="addBtn">Submit form</button>
+          </div>
+          <div id="addFormAlert" class="col-10 alert alert-success text-center fade" role="alert">
+            Product added successfully!
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-responsive table-responsive-sm">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">NAME</th>
+            <th scope="col">IMAGE</th>
+            <th scope="col">BRAND NAME</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <footer class="py-3">
+    <div class="w-75 m-auto fs-6 d-flex justify-content-evenly">
+      <span>© 1997-2025 Marketpalce, Inc</span> &sdot;
+      <span>Sede legale e amministrativa Via a caso, XX, Cesena</span> &sdot;
+      <span>C.F. e P.I. XXXYYYZZZTT</span>
+    </div>
+  </footer>
+</body>
+
+</html>

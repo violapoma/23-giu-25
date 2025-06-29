@@ -1,0 +1,44 @@
+#mainContent {
+  font-family: unset;
+  flex: 1;
+}
+
+td>.btn {
+  transition: transform 0.3s ease-out;
+}
+
+td>.btn:hover {
+  transform: scale(1.5);
+}
+
+.dropdownBtn {
+  background-color: var(--button-primary-color);
+  color: var(--button-primary-text-color);
+}
+
+.dropdownBtn:hover {
+  background-color: var(--button-primary-hover-color);
+}
+
+.dropdown-menu {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: unset !important;
+  border: none !important;
+}
+
+
+.truncate {
+  max-width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*adattato da bs5*/
+@media (max-width: 768px) {
+  .truncate-sm {
+    max-width: 150px;
+  }
+}
