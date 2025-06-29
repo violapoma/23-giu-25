@@ -26,10 +26,11 @@
 }
 
 .infoCol{
-  /* border-radius: 20px; */
   background-color: var(--card-background-color);
-  padding: 2em;
-  /* box-shadow: 6px 6px 5px var(--secondary-text-color); */
+}
+
+.pDescr{
+  height: 150px;
 }
 
 .banner{
@@ -51,7 +52,7 @@
   height: 0;
   border-top: 25px solid transparent;
   border-bottom: 25px solid transparent;
-  border-left: 25px solid var(--main-background-color);
+  border-left: 25px solid var(--card-background-color);
 }
 
 @keyframes pop {

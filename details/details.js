@@ -3,6 +3,7 @@ const id = queryParams.get('id');
 const editMode = queryParams.get('edit');
 console.log('editMode:', editMode);
 const myURL = `https://striveschool-api.herokuapp.com/api/product/${id}`; //aggiornato all'elemento 
+const baseURL = 'https://striveschool-api.herokuapp.com/api/product/';
 const myToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODVhOThmNDRlZjFiYzAwMTVkZjViMDciLCJpYXQiOjE3NTA3Njc4NjEsImV4cCI6MTc1MTk3NzQ2MX0.TAAwRbaWxFOxRudgBvko5842qwiC8LUg6ypoF-H5sD4';
 const row = document.querySelector('#contentRow');
 
@@ -51,7 +52,14 @@ function renderProduct(prod) {
 
   //  INFO COL
   const infoCol = document.createElement('div');
-  infoCol.className = 'col-7 d-flex flex-column justify-content-center infoCol rounded';
+  infoCol.className = 'col-7 d-flex flex-column justify-content-center px-4 py-3 infoCol rounded';
+
+  const bannerWrapper = document.createElement('div');
+  bannerWrapper.className = 'd-flex justify-content-end';
+  const banner = document.createElement('div');
+  banner.className = 'w-25 text-center banner';
+  banner.innerText = 'AVAILABLE';
+  bannerWrapper.appendChild(banner);
 
   const prodName = document.createElement('h1');
   prodName.innerText = prod.name;
@@ -63,13 +71,13 @@ function renderProduct(prod) {
 
   const prodDescr = document.createElement('p');
   prodDescr.innerText = prod.description;
-  prodDescr.className = 'fs-3 productFont secondaryTextColor'
+  prodDescr.className = 'fs-3 productFont pDescr secondaryTextColor overflow-y-scroll';
 
   const price = document.createElement('p');
   price.innerText = `Price: ${prod.price}€`;
   price.className = 'fs-4 fw-semibold primaryTextColor'
 
-  infoCol.append(prodName, brandName, prodDescr, price);
+  infoCol.append(bannerWrapper, prodName, brandName, prodDescr, price);
 
   row.append(imgCol, infoCol);
 }
@@ -252,3 +260,4 @@ async function updateItem(item) {
     alert.classList.remove('show');
   }, 2000);
 }
+
