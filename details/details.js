@@ -40,10 +40,10 @@ function setBreadcrumb(pName, prevPage) {
 }
 
 function renderProduct(prod) {
-  const imgCol = document.createElement('div');
-  imgCol.className = 'col-5 px-5';
-
   //IMG COL
+  const imgCol = document.createElement('div');
+  imgCol.className = 'col-sm-12 col-md-5 px-5 mb-sm-3 d-flex justify-content-center align-items-center';
+
   const prodImg = document.createElement('img');
   prodImg.src = prod.imageUrl;
   prodImg.alt = prod.name;
@@ -52,12 +52,12 @@ function renderProduct(prod) {
 
   //  INFO COL
   const infoCol = document.createElement('div');
-  infoCol.className = 'col-7 d-flex flex-column justify-content-center px-4 py-3 infoCol rounded';
+  infoCol.className = 'col-sm-12 col-md-7 d-flex flex-column justify-content-center px-4 py-3 infoCol rounded';
 
   const bannerWrapper = document.createElement('div');
-  bannerWrapper.className = 'd-flex justify-content-end';
+  bannerWrapper.className = 'd-sm-none d-lg-flex justify-content-end';
   const banner = document.createElement('div');
-  banner.className = 'w-25 text-center banner';
+  banner.className = 'w-25 text-center fs-4 banner';
   banner.innerText = 'AVAILABLE';
   bannerWrapper.appendChild(banner);
 

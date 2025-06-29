@@ -10,6 +10,10 @@
   color: var(--secondary-text-color);
 }
 
+.cardBg{
+  background-color: var(--card-background-color);
+}
+
 /************** MOD edit *************/
 .form-control.fs-4 {
   font-size: calc(1.275rem + 0.3vw);
@@ -19,7 +23,7 @@
 }
 
 .imgPreview {
-  height: 55vh;
+  max-height: 55vh;
   object-fit: contain;
   background-color: white;
   padding: 1em;
@@ -30,11 +34,11 @@
 }
 
 .pDescr{
-  height: 150px;
+  max-height: 150px;
 }
 
 .banner{
-  font-size: 2em;
+  width: 40% !important;
   border-radius: 5px;
   background-color: var(--available-bg);
   position: relative;
