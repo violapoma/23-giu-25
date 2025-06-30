@@ -21,7 +21,13 @@ async function getProductDetails() {
   console.log(product);
   const prevPage = editMode ? 'Backoffice' : 'Home';
   setBreadcrumb(product.name, prevPage);
-  editMode ? editProduct(product) : renderProduct(product);
+  
+  if (editMode) 
+    editProduct(product) 
+  else {
+  renderProduct(product);
+  getMoreFromBrand(product.brand);
+  }
 }
 
 function setBreadcrumb(pName, prevPage) {
@@ -42,7 +48,7 @@ function setBreadcrumb(pName, prevPage) {
 function renderProduct(prod) {
   //IMG COL
   const imgCol = document.createElement('div');
-  imgCol.className = 'col-sm-12 col-md-5 px-5 mb-sm-3 d-flex justify-content-center align-items-center';
+  imgCol.className = 'col-sm-12 col-md-4 mb-sm-3 d-flex justify-content-center align-items-center';
 
   const prodImg = document.createElement('img');
   prodImg.src = prod.imageUrl;
@@ -52,7 +58,7 @@ function renderProduct(prod) {
 
   //  INFO COL
   const infoCol = document.createElement('div');
-  infoCol.className = 'col-sm-12 col-md-7 d-flex flex-column justify-content-center px-4 py-3 infoCol rounded';
+  infoCol.className = 'col-sm-12 col-md-5 d-flex flex-column justify-content-center py-3 infoCol rounded';
 
   const bannerWrapper = document.createElement('div');
   bannerWrapper.className = 'd-sm-none d-lg-flex justify-content-end';
@@ -261,3 +267,89 @@ async function updateItem(item) {
   }, 2000);
 }
 
+
+function renderMoreFromBrand(sameBrand){
+  const sameWithout = sameBrand.filter((elem)=>elem._id!==id);
+  const maxLength = Math.max(sameBrand.length, 3); //metto al massimo tre elementi
+  const sliced = sameWithout.slice(0, maxLength); 
+
+  const mappedElems = sliced.map(elem => renderElementBrand(elem));
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'col-sm-12 col-md-2 cardBg moreWrapper mx-2 rounded py-1';
+
+  const cardContainer = document.createElement('div');
+  cardContainer.className = 'moreCardCont';
+
+  const title = document.createElement('h2');
+  title.className = 'moreTitle cardBg text-center';
+  title.innerText = 'More from the same brand';
+
+  cardContainer.append(title, ...mappedElems);
+  wrapper.appendChild(cardContainer);
+  row.append(wrapper);
+}
+
+function renderElementBrand(elem) {
+  const card = document.createElement('div');
+  card.className ='card text-center';
+
+  const imgLink = document.createElement('a');
+  imgLink.href = `/details/details.html?id=${elem._id}`; 
+  console.log(imgLink.href);
+
+  const img = document.createElement('img');
+  img.className = 'card-img-top moreCardImg';
+  img.src=elem.imageUrl;
+  img.alt=elem.name;
+  
+  imgLink.append(img);
+
+  const cardBody = document.createElement('div');
+  cardBody.className = 'card-body cardBodyStyle';
+
+  const prodName = document.createElement('h2');
+  prodName.innerText = elem.name;
+  prodName.className = 'card-title fs-4';
+  
+  const prodPrice = document.createElement('p'); 
+  prodPrice.innerText = `Price: ${elem.price}€`;
+  prodPrice.className = 'card-text fw-bold fs-4';
+
+  cardBody.append(prodName, prodPrice);
+
+  card.append(imgLink, cardBody);
+
+  return card;
+}
+
+async function getMoreFromBrand(brand){
+  try{
+    const resp = await fetch(baseURL, {
+      headers: {
+        Authorization: myToken
+      }
+    });
+    const prods = await resp.json();
+    console.log('prods dentro getMore', prods);
+
+    //array lungo almeno 1, cioè c'è solo quel prodotto
+    const sameBrand = prods.filter((prod) => prod.brand === brand);
+    console.log('sameBrand', sameBrand);
+  
+    if (sameBrand.length > 1) //1 == c'è solo quel prodotto -> niente
+      renderMoreFromBrand(sameBrand);
+    else 
+      fillTheGap();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function fillTheGap(){
+  const wrapper = document.createElement('div');
+  wrapper.className = 'col-sm-12 col-md-2 moreWrapper mx-2 rounded py-1 fillTheGap d-flex align-items-center';
+  wrapper.innerText = 'More content soon';
+ 
+  row.append(wrapper);
+}
