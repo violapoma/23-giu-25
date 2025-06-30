@@ -21,9 +21,11 @@ Per accedere alla parte backoffice serve un identificativo, sono già inseriti p
 - backoffice\
   Contiene l'html, il css e il js della pagina backoffice.\
   Da backoffice.html l'admin può gestire i prodotti.\
-  Per la pagina di modifica ho riciclato la pagina di dettaglio, passando un paramtro in più `edit=on` per gestire poi la funzione di rendering della pagina.
+  Per la pagina di modifica ho riciclato la pagina di dettaglio, passando un paramtro in più `edit=on` per gestire poi la funzione di rendering della pagina (vedi poi).
 - details\
-  Contiene l'html, il css e il js della pagina di dettaglio del prodotto.
+  Contiene l'html, il css e il js della pagina di dettaglio del prodotto.\
+  Tramite il parametro `edit=on` la pagina si apre in modalià edit, quindi un nuvoo form per modificare il prodotto corrente.\
+  Se il paramentro non è presente, viene invedce renderizzata la pagina completa. Rispetto alla versione edit, è presente un banner puramente riempitivo, che dice che il prodotto è disponibile, e una colonna che fa vedere al massimo altri tre prodotti dello stesso brand, escluso quello corrente; se il prodotto è l'unico di quel brand, viene mostrato il messaggio 'More coming soon. 
 ## LOGIN
 L'ho gestito con sessionStorage tramite il parametro `adminLogged`.\
 Una volta loggato, l'amministratore può accedere al backoffice tramite apposito tasto, che compare solo se appunto si è loggato.
